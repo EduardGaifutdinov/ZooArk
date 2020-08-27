@@ -36,6 +36,8 @@ definitions:
 info:
   contact: {}
   license: {}
+  title: ZooArk
+  version: 1.0.0
 paths:
   /is-authenticated:
     get:

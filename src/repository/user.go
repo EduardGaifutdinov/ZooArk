@@ -12,7 +12,7 @@ import (
 type UserRepo struct {}
 
 // NewUserRepo return pointer to user repository
-// With all methods
+// with all methods
 func NewUserRepo() *UserRepo {
 	return &UserRepo{}
 }

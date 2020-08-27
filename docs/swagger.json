@@ -1,8 +1,10 @@
 {
     "swagger": "2.0",
     "info": {
+        "title": "ZooArk",
         "contact": {},
-        "license": {}
+        "license": {},
+        "version": "1.0.0"
     },
     "paths": {
         "/is-authenticated": {

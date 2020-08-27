@@ -9,7 +9,7 @@ import (
 )
 
 // ValidatorMiddleware used to validate users
-// By their roles
+// by their roles
 type ValidatorMiddleware interface {
 	ValidatorRoles(roles ...string) gin.HandlerFunc
 }
@@ -24,8 +24,8 @@ func NewValidator() *Validator {
 }
 
 // ValidateRoles takes roles enums and validate each role
-// For the upcoming request, aborts the request
-// If role wasn't found in validRoles array
+// for the upcoming request, aborts the request
+// if role wasn't found in validRoles array
 func (v *Validator) ValidateRoles(roles ...string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var validRoles []string

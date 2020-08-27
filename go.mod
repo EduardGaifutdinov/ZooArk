@@ -34,12 +34,13 @@ require (
 	github.com/stretchr/testify v1.5.1
 	github.com/swaggo/files v0.0.0-20190704085106-630677cd5c14
 	github.com/swaggo/gin-swagger v1.2.0
+	github.com/swaggo/http-swagger v0.0.0-20200308142732-58ac5e232fba // indirect
 	github.com/swaggo/swag v1.6.7
 	github.com/urfave/cli/v2 v2.2.0 // indirect
 	golang.org/x/crypto v0.0.0-20200728195943-123391ffb6de
 	golang.org/x/net v0.0.0-20200822124328-c89045814202
-	golang.org/x/sys v0.0.0-20200820212457-1fb795427249 // indirect
-	golang.org/x/tools v0.0.0-20200827010519-17fd2f27a9e3 // indirect
+	golang.org/x/sys v0.0.0-20200826173525-f9321e4c35a6 // indirect
+	golang.org/x/tools v0.0.0-20200827143046-df83f4e7c16e // indirect
 	google.golang.org/protobuf v1.25.0 // indirect
 	gopkg.in/yaml.v2 v2.3.0 // indirect
 )

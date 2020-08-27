@@ -42,7 +42,7 @@ func SetupRouter() *gin.Engine {
 	r.GET("/ZooArk/static/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.GET("/is-authenticated", auth.IsAuthenticated)
 	r.POST("/login", middleware.Passport().LoginHandler)
-	r.GET("/logut", middleware.Passport().LogoutHandler)
+	r.GET("/logout", middleware.Passport().LogoutHandler)
 
 	authRequired := r.Group("/")
 	authRequired.Use(middleware.Passport().MiddlewareFunc())
