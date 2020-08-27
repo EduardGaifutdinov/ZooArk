@@ -17,8 +17,6 @@ swag init
 ```
 ### [How to describe swagger routes](https://github.com/swaggo/swag/blob/master/README.md)
 #### [Examples](https://github.com/swaggo/swag/blob/master/example/celler/controller/examples.go)
-### Dockerization
-```
 ___
 ### How to 
 ##### Run migrations and seeds
