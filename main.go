@@ -1,6 +1,6 @@
 package main
 
-import "https:/src/delivery"
+import "github.com/ZooArk/src/delivery"
 
 func main() {
 	r := delivery.SetupRouter()

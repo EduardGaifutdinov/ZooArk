@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// Base contains common colums for all tables
+// Base contains common columns for all tables
 type Base struct {
 	ID        uuid.UUID  `gorm:"type:uuid;" json:"id"`
 	CreatedAt time.Time  `json:"-"`

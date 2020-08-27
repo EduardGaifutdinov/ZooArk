@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	config "https:/src/config"
-	"https:/src/domain"
-	"https:/src/types"
+	"github.com/ZooArk/db/seeds/dev"
+	"github.com/ZooArk/src/config"
+	"github.com/ZooArk/src/domain"
+	"github.com/ZooArk/src/types"
 )
 
 func main()  {
@@ -14,17 +15,22 @@ func main()  {
 
 	migrate()
 	fmt.Println("=== ADD MIGRATIONS ===")
+
+	dev.CreateAdmin()
+	dev.CreateUsers()
 }
 
 func migrate() {
 	config.DB.DropTableIfExists(
-		&domain.User{},
 		&domain.Base{},
+		&domain.User{},
+		&domain.Seed{},
 		)
 	
 	config.DB.AutoMigrate(
-		&domain.User{},
+		&domain.Seed{},
 		&domain.Base{},
+		&domain.User{},
 		)
 	
 }
@@ -34,7 +40,7 @@ func addDbConstraints() {
 }
 
 func createTypes()  {
-	userTypesQuery := fmt.Sprintf("CREATE TYPE user_roles AS ENUM ('%s', '%s', '%s', '%s')",
+	userTypesQuery := fmt.Sprintf("CREATE TYPE user_roles AS ENUM ('%s', '%s')",
 		types.UserRoleEnum.SuperAdmin,
 		types.UserRoleEnum.User,
 		)

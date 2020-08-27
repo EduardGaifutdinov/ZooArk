@@ -1,11 +1,11 @@
 package usecase
 
 import (
+	"github.com/ZooArk/src/delivery/middleware"
+	"github.com/ZooArk/src/repository"
+	"github.com/ZooArk/src/types"
+	"github.com/ZooArk/src/utils"
 	"github.com/gin-gonic/gin"
-	"https:/src/delivery/middleware"
-	"https:/src/repository"
-	"https:/src/types"
-	"https:/src/utils"
 	"net/http"
 )
 
@@ -18,11 +18,11 @@ func NewAuth() *Auth {
 	return &Auth{}
 }
 
-// IsAuthenticated check i user is authorized and
+// IsAuthenticated check if user is authorized and
 // if user exists
-// @Summary returns user info if authorized
+// @Summary Returns user info if authorized
 // @Produce json
-// @Accept Json
+// @Accept json
 // @Tags auth
 // @Success 200 {object} response.UserResponse
 // @Failure 401 {object} types.Error

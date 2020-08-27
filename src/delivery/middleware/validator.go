@@ -2,9 +2,9 @@ package middleware
 
 import (
 	"fmt"
+	"github.com/ZooArk/src/types"
+	"github.com/ZooArk/src/utils"
 	"github.com/gin-gonic/gin"
-	"https:/src/types"
-	"https:/src/utils"
 	"net/http"
 )
 

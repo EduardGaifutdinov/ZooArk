@@ -1,15 +1,13 @@
 package delivery
 
 import (
+	"github.com/ZooArk/src/delivery/middleware"
+	"github.com/ZooArk/src/usecase"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	"golang.org/x/net/trace"
-	"https:/src/delivery/middleware"
-	"https:/src/types"
-	"https:/src/usecase"
 	"net/http"
 	"os"
 )
@@ -29,7 +27,6 @@ func SetupRouter() *gin.Engine {
 
 	auth := usecase.NewAuth()
 
-	validator := middleware.NewValidator()
 
 	configCors := cors.DefaultConfig()
 	configCors.AllowOrigins = []string{os.Getenv("CLIENT_URL"), os.Getenv("CLIENT_MOBILE_URL")}

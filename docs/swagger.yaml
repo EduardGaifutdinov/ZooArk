@@ -1,0 +1,104 @@
+definitions:
+  ErrorResponse:
+    properties:
+      code:
+        type: integer
+      error:
+        type: string
+    type: object
+  LoginRequest:
+    properties:
+      email:
+        example: admin@mail.ru
+        type: string
+      password:
+        example: Password12!
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  response.UserResponse:
+    properties:
+      email:
+        type: string
+      firstName:
+        type: string
+      id:
+        type: string
+      lastName:
+        type: string
+      role:
+        type: string
+      status:
+        type: string
+    type: object
+info:
+  contact: {}
+  license: {}
+paths:
+  /is-authenticated:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.UserResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Returns user info if authorized
+      tags:
+      - auth
+  /login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: User Credentials
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.UserResponse'
+        "401":
+          description: Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Returns info about user
+      tags:
+      - auth
+  /logout:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "401":
+          description: Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Removes cookie if set
+      tags:
+      - auth
+swagger: "2.0"

@@ -2,12 +2,12 @@ package middleware
 
 import (
 	"errors"
+	"github.com/ZooArk/src/repository"
+	"github.com/ZooArk/src/schemes/request"
+	"github.com/ZooArk/src/types"
+	"github.com/ZooArk/src/utils"
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
-	"https:/src/repository"
-	"https:/src/schemes/request"
-	"https:/src/types"
-	"https:/src/utils"
 	"net/http"
 	"os"
 	"time"

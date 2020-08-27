@@ -1,0 +1,56 @@
+[
+  {
+    "firstName": "Mariana",
+    "lastName": "Fox",
+    "email": "marianafox@comcubine.com",
+    "role": "User"
+  },
+  {
+    "firstName": "Maggie",
+    "lastName": "Todd",
+    "email": "maggietodd@comcubine.com",
+    "role": "User"
+  },
+  {
+    "firstName": "Aline",
+    "lastName": "Glenn",
+    "email": "alineglenn@comcubine.com",
+    "role": "User"
+  },
+  {
+    "firstName": "Ginger",
+    "lastName": "Love",
+    "email": "gingerlove@comcubine.com",
+    "role": "User"
+  },
+  {
+    "firstName": "Hayden",
+    "lastName": "Daniel",
+    "email": "haydendaniel@comcubine.com",
+    "role": "User"
+  },
+  {
+    "firstName": "Melody",
+    "lastName": "Bond",
+    "email": "melodybond@comcubine.com",
+    "role": "User"
+  },
+  {
+    "firstName": "user1",
+    "lastName": "lastname",
+    "email": "user1@meals.com",
+    "role": "User"
+  },
+  {
+    "firstName": "user2",
+    "lastName": "lastname",
+    "email": "user2@meals.com",
+    "role": "User"
+  },
+  {
+    "firstName": "user3",
+    "lastName": "lastname",
+    "email": "user3@meals.com",
+    "role": "User"
+  }
+]

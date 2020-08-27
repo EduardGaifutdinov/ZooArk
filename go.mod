@@ -1,4 +1,4 @@
-module https: //github.com/EduardGaifutdinov/ZooArk.git
+module github.com/ZooArk
 
 go 1.14
 
@@ -37,9 +37,9 @@ require (
 	github.com/swaggo/swag v1.6.7
 	github.com/urfave/cli/v2 v2.2.0 // indirect
 	golang.org/x/crypto v0.0.0-20200728195943-123391ffb6de
-	golang.org/x/net v0.0.0-20200813134508-3edf25e44fcc
+	golang.org/x/net v0.0.0-20200822124328-c89045814202
 	golang.org/x/sys v0.0.0-20200820212457-1fb795427249 // indirect
-	golang.org/x/tools v0.0.0-20200820180210-c8f393745106 // indirect
+	golang.org/x/tools v0.0.0-20200827010519-17fd2f27a9e3 // indirect
 	google.golang.org/protobuf v1.25.0 // indirect
 	gopkg.in/yaml.v2 v2.3.0 // indirect
 )

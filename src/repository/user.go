@@ -1,10 +1,10 @@
 package repository
 
 import (
+	"github.com/ZooArk/src/config"
+	"github.com/ZooArk/src/domain"
 	"github.com/jinzhu/gorm"
 	uuid "github.com/satori/go.uuid"
-	"https:/src/config"
-	"https:/src/domain"
 	"net/http"
 )
 

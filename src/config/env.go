@@ -20,7 +20,7 @@ type env struct {
 var Env env
 
 func init()  {
-	_ = godotenv.Load(os.ExpandEnv("$GOPATH/src/ZooArk/.env"))
+	_ = godotenv.Load(os.ExpandEnv("$GOPATH/src/github.com/ZooArk/.env"))
 	Env = env{
 		DbHost:     os.Getenv("DB_HOST"),
 		DbPort:     os.Getenv("DB_PORT"),
