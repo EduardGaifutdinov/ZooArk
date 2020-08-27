@@ -15,7 +15,7 @@ type ValidatorMiddleware interface {
 }
 
 // Validator struct
-type Validator struct {}
+type Validator struct{}
 
 // NewValidator return pointer to validator struct
 // which includes all validate methods

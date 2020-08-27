@@ -27,13 +27,13 @@ var userRepo = repository.NewUserRepo()
 // Passport is middleware for user authentication
 func Passport() *jwt.GinJWTMiddleware {
 	authMiddleware, _ := jwt.New(&jwt.GinJWTMiddleware{
-		Realm: "Zoo",
-		Key: []byte(os.Getenv("JWTSECRET")),
-		Timeout: time.Hour * 4,
-		MaxRefresh: time.Hour * 25,
+		Realm:       "Zoo",
+		Key:         []byte(os.Getenv("JWTSECRET")),
+		Timeout:     time.Hour * 4,
+		MaxRefresh:  time.Hour * 25,
 		IdentityKey: IdentityKeyID,
-		SendCookie: true,
-		CookieName: "jwt",
+		SendCookie:  true,
+		CookieName:  "jwt",
 		TokenLookup: "cookie:jwt",
 		LoginResponse: func(c *gin.Context, i int, s string, t time.Time) {
 			value, _ := Passport().ParseTokenString(s)
@@ -97,9 +97,9 @@ func Passport() *jwt.GinJWTMiddleware {
 			}
 			return nil, errors.New("incorrect email or password")
 		},
-		Unauthorized: func (c *gin.Context, code int, message string) {
+		Unauthorized: func(c *gin.Context, code int, message string) {
 			c.JSON(code, gin.H{
-				"code": code,
+				"code":    code,
 				"message": message,
 			})
 		},

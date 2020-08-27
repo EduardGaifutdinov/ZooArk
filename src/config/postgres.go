@@ -24,4 +24,3 @@ func init() {
 
 	fmt.Println("You connected to your database.")
 }
-

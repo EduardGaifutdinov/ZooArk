@@ -9,7 +9,7 @@ import (
 )
 
 // UserRepo struct
-type UserRepo struct {}
+type UserRepo struct{}
 
 // NewUserRepo return pointer to user repository
 // with all methods
@@ -51,10 +51,10 @@ func (ur UserRepo) UpdateStatus(userID uuid.UUID, status string) (int, error) {
 		Where("id = ?", userID).
 		Update("status", status).
 		Error; err != nil {
-			if gorm.IsRecordNotFoundError(err) {
-				return http.StatusNotFound, err
-			}
-			return http.StatusBadRequest, err
+		if gorm.IsRecordNotFoundError(err) {
+			return http.StatusNotFound, err
 		}
+		return http.StatusBadRequest, err
+	}
 	return 0, nil
 }

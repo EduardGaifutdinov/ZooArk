@@ -20,11 +20,11 @@ func CreateAdmin() {
 
 		superAdmin := domain.User{
 			FirstName: "super",
-			LastName: "user",
-			Email: "admin@mail.ru",
-			Password: utils.HashString("password12!"),
-			Status: &types.StatusTypesEnum.Active,
-			Role: types.UserRoleEnum.SuperAdmin,
+			LastName:  "user",
+			Email:     "admin@mail.ru",
+			Password:  utils.HashString("password12!"),
+			Status:    &types.StatusTypesEnum.Active,
+			Role:      types.UserRoleEnum.SuperAdmin,
 		}
 
 		config.DB.Create(&superAdmin)

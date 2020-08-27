@@ -27,7 +27,6 @@ func SetupRouter() *gin.Engine {
 
 	auth := usecase.NewAuth()
 
-
 	configCors := cors.DefaultConfig()
 	configCors.AllowOrigins = []string{os.Getenv("CLIENT_URL"), os.Getenv("CLIENT_MOBILE_URL")}
 

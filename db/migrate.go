@@ -8,7 +8,7 @@ import (
 	"github.com/ZooArk/src/types"
 )
 
-func main()  {
+func main() {
 	fmt.Println("=== CREATING TYPES ===")
 	createTypes()
 	fmt.Println("=== TYPES ARE CREATED")
@@ -25,25 +25,25 @@ func migrate() {
 		&domain.Base{},
 		&domain.User{},
 		&domain.Seed{},
-		)
-	
+	)
+
 	config.DB.AutoMigrate(
 		&domain.Seed{},
 		&domain.Base{},
 		&domain.User{},
-		)
-	
+	)
+
 }
 
 func addDbConstraints() {
-	
+
 }
 
-func createTypes()  {
+func createTypes() {
 	userTypesQuery := fmt.Sprintf("CREATE TYPE user_roles AS ENUM ('%s', '%s')",
 		types.UserRoleEnum.SuperAdmin,
 		types.UserRoleEnum.User,
-		)
+	)
 
 	config.DB.Exec(userTypesQuery)
 }

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/ZooArk/src/delivery"
 	_ "github.com/ZooArk/docs"
+	"github.com/ZooArk/src/delivery"
 )
 
 // @title ZooArk
