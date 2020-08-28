@@ -32,7 +32,7 @@ func (v *Validator) ValidateRoles(roles ...string) gin.HandlerFunc {
 		claims, _ := Passport().GetClaimsFromJWT(c)
 
 		userID := claims["id"]
-		user, _ := userRepo.GeByKey("id", fmt.Sprint("%v", userID))
+		user, _ := userRepo.GeByKey("id", fmt.Sprintf("%v", userID))
 		status := utils.DerefString(user.Status)
 
 		if status == types.StatusTypesEnum.Deleted {

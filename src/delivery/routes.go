@@ -2,6 +2,7 @@ package delivery
 
 import (
 	"github.com/ZooArk/src/delivery/middleware"
+	"github.com/ZooArk/src/types"
 	"github.com/ZooArk/src/usecase"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/static"
@@ -27,8 +28,12 @@ func SetupRouter() *gin.Engine {
 
 	auth := usecase.NewAuth()
 
+	validator := middleware.NewValidator()
+
 	configCors := cors.DefaultConfig()
 	configCors.AllowOrigins = []string{os.Getenv("CLIENT_URL"), os.Getenv("CLIENT_MOBILE_URL")}
+
+	product := usecase.NewProduct()
 
 	configCors.AllowCredentials = true
 	r.Use(cors.New(configCors))
@@ -46,7 +51,15 @@ func SetupRouter() *gin.Engine {
 	authRequired := r.Group("/")
 	authRequired.Use(middleware.Passport().MiddlewareFunc())
 	{
-
+		allUsers := authRequired.Group("/")
+		allUsers.Use(validator.ValidateRoles(
+			types.UserRoleEnum.SuperAdmin,
+			types.UserRoleEnum.User,
+			))
+			{
+				// Products
+				allUsers.POST("/products", product.Add)
+			}
 	}
 	return r
 }

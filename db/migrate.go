@@ -18,12 +18,14 @@ func main() {
 
 	dev.CreateAdmin()
 	dev.CreateUsers()
+	dev.CreateProducts()
 }
 
 func migrate() {
 	config.DB.DropTableIfExists(
 		&domain.Base{},
 		&domain.User{},
+		&domain.Product{},
 		&domain.Seed{},
 	)
 
@@ -31,6 +33,7 @@ func migrate() {
 		&domain.Seed{},
 		&domain.Base{},
 		&domain.User{},
+		&domain.Product{},
 	)
 
 }

@@ -1,4 +1,13 @@
 definitions:
+  AddProductRequest:
+    properties:
+      count:
+        type: integer
+      name:
+        type: string
+      price:
+        type: number
+    type: object
   ErrorResponse:
     properties:
       code:
@@ -17,6 +26,17 @@ definitions:
     required:
     - email
     - password
+    type: object
+  domain.Product:
+    properties:
+      count:
+        type: integer
+      id:
+        type: string
+      name:
+        type: string
+      price:
+        type: integer
     type: object
   response.UserResponse:
     properties:
@@ -103,4 +123,25 @@ paths:
       summary: Removes cookie if set
       tags:
       - auth
+  /products:
+    post:
+      parameters:
+      - description: product object
+        in: body
+        name: payload
+        schema:
+          $ref: '#/definitions/AddProductRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: product object
+          schema:
+            $ref: '#/definitions/domain.Product'
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+      - product
 swagger: "2.0"
