@@ -29,14 +29,14 @@ var productRepo = repository.NewProductRepo()
 func (p Product) Add(c *gin.Context) {
 	var product domain.Product
 
-	if err := utils.RequestBinderBody(&product, c); err != nil{
+	if err := utils.RequestBinderBody(&product, c); err != nil {
 		return
 	}
 
 	err := productRepo.Add(&product)
 
 	if err != nil {
-		utils.CreateError(http.StatusBadRequest, err.Error(), c)
+		utils.CreateError(http.StatusBadRequest, err, c)
 		return
 	}
 	c.JSON(http.StatusOK, product)

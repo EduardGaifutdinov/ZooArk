@@ -8,12 +8,12 @@ import (
 )
 
 // CreateProduct creates seeds for products table
-func CreateProducts()  {
+func CreateProducts() {
 	seedExists := config.DB.
 		Where("name = ?", "init products").
 		First(&domain.Seed{}).Error
 	if seedExists != nil {
-		seed  := domain.Seed{
+		seed := domain.Seed{
 			Name: "init products",
 		}
 

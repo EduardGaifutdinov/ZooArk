@@ -1,6 +1,7 @@
 package usecase
 
 import (
+	"errors"
 	"github.com/ZooArk/src/domain"
 	"github.com/ZooArk/src/repository"
 	"github.com/ZooArk/src/schemes/request"
@@ -9,11 +10,13 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/copier"
 	"github.com/jinzhu/gorm"
+	uuid "github.com/satori/go.uuid"
 	"net/http"
+	"time"
 )
 
 // User struct
-type User struct {}
+type User struct{}
 
 // NewUser return pointer to user struct
 // with all methods
@@ -35,24 +38,19 @@ var userRepo = repository.NewUserRepo()
 func (u *User) Add(c *gin.Context) {
 	var body request.User
 	var user domain.User
-	//var path types.PathID
-
-	//if err := utils.RequestBinderURI(&path, c); err != nil {
-	//	return
-	//}
 
 	if err := utils.RequestBinderBody(&body, c); err != nil {
 		return
 	}
 
 	if err := copier.Copy(&user, &body); err != nil {
-		utils.CreateError(http.StatusBadRequest, err.Error(), c)
-			return
+		utils.CreateError(http.StatusBadRequest, err, c)
+		return
 	}
 
 	if ok := utils.IsEmailValid(user.Email); !ok {
-		utils.CreateError(http.StatusBadRequest, "email is not valid", c)
-			return
+		utils.CreateError(http.StatusBadRequest, errors.New("email is not valid"), c)
+		return
 	}
 
 	user.Role = types.UserRoleEnum.User
@@ -66,7 +64,7 @@ func (u *User) Add(c *gin.Context) {
 		_, err := userRepo.Add(*&user)
 
 		if err != nil {
-			utils.CreateError(http.StatusBadRequest, err.Error(), c)
+			utils.CreateError(http.StatusBadRequest, err, c)
 			return
 		}
 
@@ -75,7 +73,7 @@ func (u *User) Add(c *gin.Context) {
 
 	for i := range existingUsers {
 		if *existingUsers[i].Status != types.StatusTypesEnum.Deleted {
-			utils.CreateError(http.StatusBadRequest, "user with that email already exist", c)
+			utils.CreateError(http.StatusBadRequest, errors.New("user with that email already exist"), c)
 			return
 		}
 	}
@@ -83,11 +81,100 @@ func (u *User) Add(c *gin.Context) {
 	user, userErr := userRepo.Add(user)
 
 	if userErr != nil {
-		utils.CreateError(http.StatusBadRequest, userErr.Error(), c)
+		utils.CreateError(http.StatusBadRequest, userErr, c)
 		return
 	}
 
 	c.JSON(http.StatusCreated, user)
+}
 
+// Delete deletes user
+// @Summary Returns error or 204 status code if success
+// @Produce json
+// @Accept json
+// @Tags Users
+// @Param id path string false "User ID"
+// @Success 204 "Successfully deleted"
+// @Failure 400 {object} types.Error "Error"
+// @Failure 404 {object} types.Error "Error"
+// @Router /users/{id} [delete]
+func (u *User) Delete(c *gin.Context) {
+	var path types.PathUser
+	var user domain.User
 
+	if err := utils.RequestBinderURI(&path, c); err != nil{
+		return
+	}
+
+	parsedUserID, _ := uuid.FromString(path.Id)
+	user.ID = parsedUserID
+	user.Status = &types.StatusTypesEnum.Deleted
+	deletedAt := time.Now().AddDate(0, 0, 21).Truncate(time.Hour * 24)
+	user.DeletedAt = &deletedAt
+
+	ctxUser, _ := c.Get("user")
+	ctxUserRole := ctxUser.(domain.User).Role
+
+	if user.ID == ctxUser.(domain.User).ID {
+		utils.CreateError(http.StatusBadRequest, errors.New("can't delete yourself"), c)
+		return
+	}
+
+	code, err := userRepo.Delete(user, ctxUserRole)
+
+	if err != nil {
+		utils.CreateError(code, err, c)
+		return
+	}
+
+	c.Status(http.StatusNoContent)
+}
+
+// Update updates user
+// @Summary Returns error or 200 status code if success
+// @Produce json
+// @Accept json
+// @Tags Users
+// @Param id path string false "User ID"
+// @Param body body request.UserUpdate false "User"
+// @Success 200 {object} response.UserResponse false "Catering user"
+// @Failure 400 {object} types.Error "Error"
+// @Failure 404 {object} types.Error "Error"
+// @Router /users/{id} [put]
+func (u *User) Update(c *gin.Context) {
+	var user domain.User
+	var path types.PathUser
+	var body request.User
+
+	if err := utils.RequestBinderURI(&path, c); err != nil{
+		return
+	}
+
+	if err := utils.RequestBinderBody(&body, c); err != nil {
+		return
+	}
+
+	if body.Email != "" {
+		if ok := utils.IsEmailValid(body.Email); !ok {
+			utils.CreateError(http.StatusBadRequest, errors.New("email is not valid"), c)
+			return
+		}
+	}
+
+	if err := copier.Copy(&user, &body); err != nil {
+		utils.CreateError(http.StatusBadRequest, err, c)
+		return
+	}
+
+	parsedUserID, _ := uuid.FromString(path.Id)
+	user.ID = parsedUserID
+	code, err := userRepo.Update(&user)
+
+	if err != nil {
+		utils.CreateError(code, err, c)
+		return
+	}
+
+	updateUser, _ := userRepo.GetByID(path.Id)
+	c.JSON(http.StatusOK, updateUser)
 }

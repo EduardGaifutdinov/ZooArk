@@ -7,7 +7,7 @@ var emailRegex = regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z
 // IsEmailValid checks if email is valid
 // returns true or false
 func IsEmailValid(e string) bool {
-	if len(e) < 3 && len(e) >254 {
+	if len(e) < 3 && len(e) > 254 {
 		return false
 	}
 	return emailRegex.MatchString(e)

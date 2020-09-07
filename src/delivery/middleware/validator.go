@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"errors"
 	"fmt"
 	"github.com/ZooArk/src/types"
 	"github.com/ZooArk/src/utils"
@@ -36,7 +37,7 @@ func (v *Validator) ValidateRoles(roles ...string) gin.HandlerFunc {
 		status := utils.DerefString(user.Status)
 
 		if status == types.StatusTypesEnum.Deleted {
-			utils.CreateError(http.StatusForbidden, "user was deleted", c)
+			utils.CreateError(http.StatusForbidden, errors.New("user was deleted"), c)
 			c.Abort()
 			return
 		}
@@ -48,7 +49,7 @@ func (v *Validator) ValidateRoles(roles ...string) gin.HandlerFunc {
 		}
 
 		if len(validRoles) == 0 {
-			utils.CreateError(http.StatusForbidden, "no permissons", c)
+			utils.CreateError(http.StatusForbidden, errors.New("no permissions"), c)
 			c.Abort()
 			return
 		}

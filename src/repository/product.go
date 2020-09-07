@@ -7,7 +7,7 @@ import (
 )
 
 // ProductRepo struct
-type ProductRepo struct {}
+type ProductRepo struct{}
 
 //NewProductRepo returns pointer to product repository
 // with all methods
@@ -22,7 +22,7 @@ func (p ProductRepo) Add(product *domain.Product) error {
 		Where("name = ?", product.Name).
 		Find(product).
 		RecordNotFound(); !productExist {
-			return errors.New("this product already exist")
+		return errors.New("this product already exist")
 	}
 
 	if err := config.DB.Create(product).Error; err != nil {

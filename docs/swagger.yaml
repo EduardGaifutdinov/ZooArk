@@ -38,6 +38,45 @@ definitions:
       price:
         type: integer
     type: object
+  request.User:
+    properties:
+      email:
+        example: razor3538@mail.ru
+        type: string
+      firstName:
+        example: Edos
+        type: string
+      lastName:
+        example: Gaifut
+        type: string
+    type: object
+  request.UserUpdate:
+    properties:
+      email:
+        example: razzzor3538@mail.ru
+        type: string
+      firstName:
+        example: Eduard
+        type: string
+      lastName:
+        example: Gaifutdinov
+        type: string
+    type: object
+  response.User:
+    properties:
+      email:
+        type: string
+      firstName:
+        type: string
+      id:
+        type: string
+      lastName:
+        type: string
+      role:
+        type: string
+      status:
+        type: string
+    type: object
   response.UserResponse:
     properties:
       email:
@@ -144,4 +183,84 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       tags:
       - product
+  /users:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: User
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/request.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: User
+          schema:
+            $ref: '#/definitions/response.User'
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Returns error or 201 status code if success
+      tags:
+      - Users
+  /users/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: Successfully deleted
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "404":
+          description: Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Returns error or 204 status code if success
+      tags:
+      - Users
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        type: string
+      - description: User
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/request.UserUpdate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Catering user
+          schema:
+            $ref: '#/definitions/response.UserResponse'
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "404":
+          description: Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Returns error or 200 status code if success
+      tags:
+      - Users
 swagger: "2.0"

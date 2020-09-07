@@ -41,21 +41,21 @@ func Passport() *jwt.GinJWTMiddleware {
 			result, err := userRepo.GetByID(id.(string))
 
 			if err != nil {
-				utils.CreateError(http.StatusUnauthorized, err.Error(), c)
+				utils.CreateError(http.StatusUnauthorized, err, c)
 				return
 			}
 
 			status := utils.DerefString(result.Status)
 
 			if status == types.StatusTypesEnum.Deleted {
-				utils.CreateError(http.StatusForbidden, "user was deleted", c)
+				utils.CreateError(http.StatusForbidden, errors.New("user was deleted"), c)
 				return
 			}
 
 			if status == types.StatusTypesEnum.Invited {
 				code, err := userRepo.UpdateStatus(result.ID, types.StatusTypesEnum.Active)
 				if err != nil {
-					utils.CreateError(code, err.Error(), c)
+					utils.CreateError(code, err, c)
 					return
 				}
 			}

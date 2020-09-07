@@ -52,16 +52,28 @@ func SetupRouter() *gin.Engine {
 	authRequired := r.Group("/")
 	authRequired.Use(middleware.Passport().MiddlewareFunc())
 	{
+		admin := authRequired.Group("/")
+		admin.Use(validator.ValidateRoles(
+			types.UserRoleEnum.SuperAdmin,
+		))
+		{
+			// Products
+			admin.POST("/products", product.Add)
+		}
+
 		allUsers := authRequired.Group("/")
 		allUsers.Use(validator.ValidateRoles(
-			types.UserRoleEnum.SuperAdmin,
 			types.UserRoleEnum.User,
-			))
-			{
-				// Products
-				allUsers.POST("/products", product.Add)
-				allUsers.POST("/users", user.Add)
-			}
+			types.UserRoleEnum.SuperAdmin,
+		))
+		{
+			// Products
+
+			// Users
+			allUsers.POST("/users", user.Add)
+			allUsers.DELETE("/users/:id", user.Delete)
+			allUsers.PUT("/users/:id", user.Update)
+		}
 	}
 	return r
 }

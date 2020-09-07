@@ -1,6 +1,7 @@
 package usecase
 
 import (
+	"errors"
 	"github.com/ZooArk/src/delivery/middleware"
 	"github.com/ZooArk/src/repository"
 	"github.com/ZooArk/src/types"
@@ -33,7 +34,7 @@ func (a Auth) IsAuthenticated(c *gin.Context) {
 	claims, err := middleware.Passport().CheckIfTokenExpire(c)
 
 	if err != nil {
-		utils.CreateError(http.StatusUnauthorized, err.Error(), c)
+		utils.CreateError(http.StatusUnauthorized, err, c)
 		return
 	}
 
@@ -45,12 +46,12 @@ func (a Auth) IsAuthenticated(c *gin.Context) {
 	result, err := userRepo.GetByID(id.(string))
 
 	if err != nil {
-		utils.CreateError(http.StatusUnauthorized, "token is expired", c)
+		utils.CreateError(http.StatusUnauthorized, errors.New("token is expired"), c)
 		return
 	}
 
 	if result.Status == &types.StatusTypesEnum.Deleted {
-		utils.CreateError(http.StatusForbidden, "user was deleted", c)
+		utils.CreateError(http.StatusForbidden, errors.New("user was deleted"), c)
 		return
 	}
 
