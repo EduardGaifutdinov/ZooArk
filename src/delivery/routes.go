@@ -34,6 +34,7 @@ func SetupRouter() *gin.Engine {
 	configCors.AllowOrigins = []string{os.Getenv("CLIENT_URL"), os.Getenv("CLIENT_MOBILE_URL")}
 
 	product := usecase.NewProduct()
+	user := usecase.NewUser()
 
 	configCors.AllowCredentials = true
 	r.Use(cors.New(configCors))
@@ -59,6 +60,7 @@ func SetupRouter() *gin.Engine {
 			{
 				// Products
 				allUsers.POST("/products", product.Add)
+				allUsers.POST("/users", user.Add)
 			}
 	}
 	return r

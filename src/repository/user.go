@@ -17,6 +17,16 @@ func NewUserRepo() *UserRepo {
 	return &UserRepo{}
 }
 
+func (ur UserRepo) GetAllByKey(key, value string) ([]domain.User, error) {
+	var user []domain.User
+	err := config.DB.
+		Unscoped().
+		Where(key+" = ?", value).
+		Find(&user).Error
+
+	return user, err
+}
+
 func (ur UserRepo) GetByID(id string) (domain.User, error) {
 	var user domain.User
 	err := config.DB.
@@ -57,4 +67,14 @@ func (ur UserRepo) UpdateStatus(userID uuid.UUID, status string) (int, error) {
 		return http.StatusBadRequest, err
 	}
 	return 0, nil
+}
+
+func (ur UserRepo) Add(user domain.User) (domain.User, error) {
+
+	if err := config.DB.
+		Create(&user).
+		Error; err != nil {
+			return domain.User{}, err
+	}
+	return user, nil
 }
