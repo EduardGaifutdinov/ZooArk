@@ -25,6 +25,44 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/categories": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "categories"
+                ],
+                "summary": "Returns error if exists and 200 if success",
+                "parameters": [
+                    {
+                        "description": "Category Name",
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/AddCategoryRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "category object",
+                        "schema": {
+                            "$ref": "#/definitions/usecase.Category"
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/is-authenticated": {
             "get": {
                 "consumes": [
@@ -286,6 +324,22 @@ var doc = `{
         }
     },
     "definitions": {
+        "AddCategoryRequest": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "example": "2020-06-29T00:00:00Z"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "закуски"
+                }
+            }
+        },
         "AddProductRequest": {
             "type": "object",
             "properties": {
@@ -424,6 +478,9 @@ var doc = `{
                     "type": "string"
                 }
             }
+        },
+        "usecase.Category": {
+            "type": "object"
         }
     }
 }`

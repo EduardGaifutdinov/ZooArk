@@ -35,6 +35,7 @@ func SetupRouter() *gin.Engine {
 
 	product := usecase.NewProduct()
 	user := usecase.NewUser()
+	category := usecase.NewCategory()
 
 	configCors.AllowCredentials = true
 	r.Use(cors.New(configCors))
@@ -59,6 +60,10 @@ func SetupRouter() *gin.Engine {
 		{
 			// Products
 			admin.POST("/products", product.Add)
+
+
+			// Categories
+			admin.POST("/categories", category.Add)
 		}
 
 		allUsers := authRequired.Group("/")
