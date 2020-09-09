@@ -64,6 +64,8 @@ func SetupRouter() *gin.Engine {
 
 			// Categories
 			admin.POST("/categories", category.Add)
+			admin.DELETE("/categories/:id", category.Delete)
+			admin.PUT("/categories/:id", category.Update)
 		}
 
 		allUsers := authRequired.Group("/")
@@ -78,6 +80,7 @@ func SetupRouter() *gin.Engine {
 			allUsers.POST("/users", user.Add)
 			allUsers.DELETE("/users/:id", user.Delete)
 			allUsers.PUT("/users/:id", user.Update)
+			allUsers.GET("/categories", category.Get)
 		}
 	}
 	return r

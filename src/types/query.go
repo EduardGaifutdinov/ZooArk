@@ -12,3 +12,9 @@ type UserFilterQuery struct {
 	Role   string `form:"role"`
 	Status string `form:"status"`
 }
+
+// DateQuery struct used for binding date
+type DateQuery struct {
+	Date string `form:"date" binding:"required"`
+}
+
