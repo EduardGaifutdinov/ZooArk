@@ -1,4 +1,15 @@
 definitions:
+  AddCategoryRequest:
+    properties:
+      date:
+        example: "2020-06-29T00:00:00Z"
+        type: string
+      name:
+        example: закуски
+        type: string
+    required:
+    - name
+    type: object
   AddProductRequest:
     properties:
       count:
@@ -92,12 +103,38 @@ definitions:
       status:
         type: string
     type: object
+  usecase.Category:
+    type: object
 info:
   contact: {}
   license: {}
   title: ZooArk
   version: 1.0.0
 paths:
+  /categories:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Category Name
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/AddCategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: category object
+          schema:
+            $ref: '#/definitions/usecase.Category'
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Returns error if exists and 200 if success
+      tags:
+      - categories
   /is-authenticated:
     get:
       consumes:

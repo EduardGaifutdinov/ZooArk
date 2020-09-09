@@ -3,31 +3,33 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="1c378c12-b841-4ac8-8c6c-1ce9ecb31692" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/seeds/dev/products.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/seeds/dev/products.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/docs.go" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/swagger.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/swagger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/swagger.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/delivery/middleware/passport.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/delivery/middleware/passport.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/delivery/middleware/validator.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/delivery/middleware/validator.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/delivery/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/delivery/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/product.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/product.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/repository/product.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/repository/product.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/repository/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/repository/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/schemes/request/add_product.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/schemes/request/add_product.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/schemes/response/get_user.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/schemes/response/get_user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/schemes/response/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/schemes/response/user.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/types/path.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/path.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/usecase/auth_ucase.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/usecase/auth_ucase.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/usecase/product_ucase.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/usecase/product_ucase.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/usecase/user_ucase.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/usecase/user_ucase.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/email_validator.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/email_validator.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/error_creator.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/error_creator.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/request_binders.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/request_binders.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/string_generator.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/string_generator.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +73,17 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
   </component>
@@ -91,9 +104,9 @@
       <screen x="67" y="27" width="2493" height="1413" />
     </state>
     <state x="244" y="278" width="1824" height="926" key="dock-window-1/67.27.2493.1413/2560.0.2560.1440@67.27.2493.1413" timestamp="1598612033564" />
-    <state x="976" y="347" width="672" height="678" key="search.everywhere.popup" timestamp="1599488259282">
+    <state x="976" y="347" width="672" height="678" key="search.everywhere.popup" timestamp="1599492583727">
       <screen x="67" y="27" width="2493" height="1413" />
     </state>
-    <state x="976" y="347" width="672" height="678" key="search.everywhere.popup/67.27.2493.1413/2560.0.2560.1440@67.27.2493.1413" timestamp="1599488259282" />
+    <state x="976" y="347" width="672" height="678" key="search.everywhere.popup/67.27.2493.1413/2560.0.2560.1440@67.27.2493.1413" timestamp="1599492583727" />
   </component>
 </project>

@@ -19,6 +19,7 @@ func main() {
 	dev.CreateAdmin()
 	dev.CreateUsers()
 	dev.CreateProducts()
+	dev.CreateCategory()
 }
 
 func migrate() {
@@ -26,6 +27,7 @@ func migrate() {
 		&domain.Base{},
 		&domain.User{},
 		&domain.Product{},
+		&domain.Category{},
 		&domain.Seed{},
 	)
 
@@ -33,6 +35,7 @@ func migrate() {
 		&domain.Seed{},
 		&domain.Base{},
 		&domain.User{},
+		&domain.Category{},
 		&domain.Product{},
 	)
 
