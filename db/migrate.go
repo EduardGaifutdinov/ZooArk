@@ -16,10 +16,13 @@ func main() {
 	migrate()
 	fmt.Println("=== ADD MIGRATIONS ===")
 
+	addDbConstraints()
+	fmt.Println("=== ADD DB CONSTRAINTS ===")
+
 	dev.CreateAdmin()
 	dev.CreateUsers()
-	dev.CreateProducts()
 	dev.CreateCategory()
+	dev.CreateProducts()
 }
 
 func migrate() {
@@ -42,7 +45,7 @@ func migrate() {
 }
 
 func addDbConstraints() {
-
+	config.DB.Model(&domain.Product{}).AddForeignKey("category_id", "categories(id)", "CASCADE", "CASCADE")
 }
 
 func createTypes() {
