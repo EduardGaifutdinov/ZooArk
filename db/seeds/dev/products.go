@@ -20,7 +20,7 @@ func CreateProducts() {
 			Name: "init products",
 		}
 
-		var productsArray []domain.Product
+		var productsArray []domain.ProductBase
 		categoryResult, _ := categoryRepo.GetByKey("name", "супы")
 		utils.JSONParse("/db/seeds/data/products.json", &productsArray)
 

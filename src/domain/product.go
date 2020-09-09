@@ -3,7 +3,7 @@ package domain
 import uuid "github.com/satori/go.uuid"
 
 // Product model
-type Product struct {
+type ProductBase struct {
 	Base
 	Name  string `gorm:"type:varchar(100); not null" json:"name"`
 	Count int    `sql:"NullInt64: not null" json:"count"`

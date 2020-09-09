@@ -17,7 +17,7 @@ func NewProductRepo() *ProductRepo {
 
 // Add creates new product entity
 // returns error or nil
-func (p ProductRepo) Add(product *domain.Product) error {
+func (p ProductRepo) Add(product *domain.ProductBase) error {
 	if productExist := config.DB.
 		Where("name = ?", product.Name).
 		Find(product).
@@ -30,4 +30,11 @@ func (p ProductRepo) Add(product *domain.Product) error {
 	}
 
 	return nil
+}
+
+// GetByKey return single product item found by key
+// and error if exist
+func (p ProductRepo) GetByKey(key, value string) (domain.ProductBase, error) {
+	var product domain.ProductBase
+	err := config.DB
 }
