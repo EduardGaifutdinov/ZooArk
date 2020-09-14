@@ -66,7 +66,6 @@ func (pc Category) Add(c *gin.Context) {
 func (pc Category) Get(c *gin.Context) {
 	var query types.DateQuery
 
-
 	if err := utils.RequestBinderQuery(&query, c); err != nil {
 		return
 	}

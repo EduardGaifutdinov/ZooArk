@@ -102,7 +102,7 @@ func (u *User) Delete(c *gin.Context) {
 	var path types.PathUser
 	var user domain.User
 
-	if err := utils.RequestBinderURI(&path, c); err != nil{
+	if err := utils.RequestBinderURI(&path, c); err != nil {
 		return
 	}
 
@@ -146,7 +146,7 @@ func (u *User) Update(c *gin.Context) {
 	var path types.PathUser
 	var body request.User
 
-	if err := utils.RequestBinderURI(&path, c); err != nil{
+	if err := utils.RequestBinderURI(&path, c); err != nil {
 		return
 	}
 

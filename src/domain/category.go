@@ -11,7 +11,7 @@ import (
 type Category struct {
 	Base
 	Date *time.Time `json:"date"`
-	Name       string     `gorm:"type:varchar(30);not null" json:"name" binding:"required"`
+	Name string     `gorm:"type:varchar(30);not null" json:"name" binding:"required"`
 }
 
 type CategoryUsecase interface {

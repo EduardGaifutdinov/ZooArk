@@ -6,7 +6,6 @@ import (
 	"github.com/ZooArk/src/domain"
 	"github.com/ZooArk/src/repository"
 	"github.com/ZooArk/src/utils"
-	"sync"
 )
 
 // CreteClothes creates seeds for clothes table
@@ -20,10 +19,15 @@ func CreateClothes() {
 		}
 
 		var clothesArray []domain.Clothes
-		productResult, _ := repository.NewProductRepo().
+		categoryResult, _ := repository.NewCategoryRepo().GetByKey("name", "clothes")
 		utils.JSONParse("/db/seeds/data/clothes.json", &clothesArray)
 
+		for i := range clothesArray {
+			clothesArray[i].CategoryID = categoryResult.ID
+			config.DB.Create(&clothesArray[i])
+		}
 
+		config.DB.Create(&seed)
 		fmt.Println("=== Clothes seeds created ===")
 	} else {
 		fmt.Printf("Seed `init clothes` already exists \n")

@@ -280,17 +280,43 @@ var doc = `{
                 }
             }
         },
-        "/products": {
+        "/products/clothes": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "clothes"
+                ],
+                "summary": "Returns list of clothes",
+                "responses": {
+                    "200": {
+                        "description": "List of clothes",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.Clothes"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            },
             "post": {
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "product"
+                    "clothes"
                 ],
                 "parameters": [
                     {
-                        "description": "product object",
+                        "description": "clothes object",
                         "name": "payload",
                         "in": "body",
                         "schema": {
@@ -300,9 +326,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "product object",
+                        "description": "clothes object",
                         "schema": {
-                            "$ref": "#/definitions/domain.Product"
+                            "$ref": "#/definitions/domain.Clothes"
                         }
                     },
                     "400": {
@@ -460,6 +486,9 @@ var doc = `{
         "AddProductRequest": {
             "type": "object",
             "properties": {
+                "color": {
+                    "type": "string"
+                },
                 "count": {
                     "type": "integer"
                 },
@@ -468,6 +497,12 @@ var doc = `{
                 },
                 "price": {
                     "type": "number"
+                },
+                "stock": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
                 }
             }
         },
@@ -528,10 +563,10 @@ var doc = `{
                 }
             }
         },
-        "domain.Product": {
+        "domain.Clothes": {
             "type": "object",
             "properties": {
-                "categoryId": {
+                "color": {
                     "type": "string"
                 },
                 "count": {
@@ -545,6 +580,12 @@ var doc = `{
                 },
                 "price": {
                     "type": "integer"
+                },
+                "stock": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
                 }
             }
         },

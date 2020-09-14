@@ -262,17 +262,43 @@
                 }
             }
         },
-        "/products": {
+        "/products/clothes": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "clothes"
+                ],
+                "summary": "Returns list of clothes",
+                "responses": {
+                    "200": {
+                        "description": "List of clothes",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.Clothes"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            },
             "post": {
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "product"
+                    "clothes"
                 ],
                 "parameters": [
                     {
-                        "description": "product object",
+                        "description": "clothes object",
                         "name": "payload",
                         "in": "body",
                         "schema": {
@@ -282,9 +308,9 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "product object",
+                        "description": "clothes object",
                         "schema": {
-                            "$ref": "#/definitions/domain.Product"
+                            "$ref": "#/definitions/domain.Clothes"
                         }
                     },
                     "400": {
@@ -442,6 +468,9 @@
         "AddProductRequest": {
             "type": "object",
             "properties": {
+                "color": {
+                    "type": "string"
+                },
                 "count": {
                     "type": "integer"
                 },
@@ -450,6 +479,12 @@
                 },
                 "price": {
                     "type": "number"
+                },
+                "stock": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
                 }
             }
         },
@@ -510,10 +545,10 @@
                 }
             }
         },
-        "domain.Product": {
+        "domain.Clothes": {
             "type": "object",
             "properties": {
-                "categoryId": {
+                "color": {
                     "type": "string"
                 },
                 "count": {
@@ -527,6 +562,12 @@
                 },
                 "price": {
                     "type": "integer"
+                },
+                "stock": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
                 }
             }
         },
