@@ -17,4 +17,3 @@ type UserFilterQuery struct {
 type DateQuery struct {
 	Date string `form:"date" binding:"required"`
 }
-

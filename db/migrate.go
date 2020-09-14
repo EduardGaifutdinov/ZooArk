@@ -22,14 +22,14 @@ func main() {
 	dev.CreateAdmin()
 	dev.CreateUsers()
 	dev.CreateCategory()
-	dev.CreateProducts()
+	dev.CreateClothes()
 }
 
 func migrate() {
 	config.DB.DropTableIfExists(
 		&domain.Base{},
 		&domain.User{},
-		&domain.Product{},
+		&domain.Clothes{},
 		&domain.Category{},
 		&domain.Seed{},
 	)
@@ -39,13 +39,13 @@ func migrate() {
 		&domain.Base{},
 		&domain.User{},
 		&domain.Category{},
-		&domain.Product{},
+		&domain.Clothes{},
 	)
 
 }
 
 func addDbConstraints() {
-	config.DB.Model(&domain.Product{}).AddForeignKey("category_id", "categories(id)", "CASCADE", "CASCADE")
+	config.DB.Model(&domain.Clothes{}).AddForeignKey("category_id", "categories(id)", "CASCADE", "CASCADE")
 }
 
 func createTypes() {

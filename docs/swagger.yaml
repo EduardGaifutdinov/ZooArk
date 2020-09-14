@@ -10,14 +10,25 @@ definitions:
     required:
     - name
     type: object
-  AddProductRequest:
+  AddClothesRequest:
     properties:
+      color:
+        type: string
       count:
         type: integer
       name:
         type: string
       price:
         type: number
+      stock:
+        type: string
+      type:
+        type: string
+    type: object
+  DeleteClothesRequest:
+    properties:
+      count:
+        type: integer
     type: object
   ErrorResponse:
     properties:
@@ -57,9 +68,9 @@ definitions:
     required:
     - name
     type: object
-  domain.Product:
+  domain.Clothes:
     properties:
-      categoryId:
+      color:
         type: string
       count:
         type: integer
@@ -69,6 +80,10 @@ definitions:
         type: string
       price:
         type: integer
+      stock:
+        type: string
+      type:
+        type: string
     type: object
   request.User:
     properties:
@@ -296,27 +311,73 @@ paths:
       summary: Removes cookie if set
       tags:
       - auth
-  /products:
-    post:
-      parameters:
-      - description: product object
-        in: body
-        name: payload
-        schema:
-          $ref: '#/definitions/AddProductRequest'
+  /products/clothes:
+    get:
       produces:
       - application/json
       responses:
         "200":
-          description: product object
+          description: List of clothes
           schema:
-            $ref: '#/definitions/domain.Product'
+            items:
+              $ref: '#/definitions/domain.Clothes'
+            type: array
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Returns list of clothes
+      tags:
+      - clothes
+    post:
+      parameters:
+      - description: clothes object
+        in: body
+        name: payload
+        schema:
+          $ref: '#/definitions/AddClothesRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: clothes object
+          schema:
+            $ref: '#/definitions/domain.Clothes'
         "400":
           description: Error
           schema:
             $ref: '#/definitions/ErrorResponse'
       tags:
-      - product
+      - clothes
+  /products/clothes/{id}:
+    delete:
+      parameters:
+      - description: Clothes ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: clothes object
+        in: body
+        name: payload
+        schema:
+          $ref: '#/definitions/DeleteClothesRequest'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: Successfully deleted
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Soft delete
+      tags:
+      - clothes
   /users:
     post:
       consumes:

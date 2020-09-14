@@ -280,33 +280,104 @@ var doc = `{
                 }
             }
         },
-        "/products": {
+        "/products/clothes": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "clothes"
+                ],
+                "summary": "Returns list of clothes",
+                "responses": {
+                    "200": {
+                        "description": "List of clothes",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.Clothes"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            },
             "post": {
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "product"
+                    "clothes"
                 ],
                 "parameters": [
                     {
-                        "description": "product object",
+                        "description": "clothes object",
                         "name": "payload",
                         "in": "body",
                         "schema": {
-                            "$ref": "#/definitions/AddProductRequest"
+                            "$ref": "#/definitions/AddClothesRequest"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "product object",
+                        "description": "clothes object",
                         "schema": {
-                            "$ref": "#/definitions/domain.Product"
+                            "$ref": "#/definitions/domain.Clothes"
                         }
                     },
                     "400": {
                         "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/products/clothes/{id}": {
+            "delete": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "clothes"
+                ],
+                "summary": "Soft delete",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Clothes ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "clothes object",
+                        "name": "payload",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/DeleteClothesRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successfully deleted"
+                    },
+                    "400": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
                         }
@@ -457,9 +528,12 @@ var doc = `{
                 }
             }
         },
-        "AddProductRequest": {
+        "AddClothesRequest": {
             "type": "object",
             "properties": {
+                "color": {
+                    "type": "string"
+                },
                 "count": {
                     "type": "integer"
                 },
@@ -468,6 +542,20 @@ var doc = `{
                 },
                 "price": {
                     "type": "number"
+                },
+                "stock": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "DeleteClothesRequest": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer"
                 }
             }
         },
@@ -528,10 +616,10 @@ var doc = `{
                 }
             }
         },
-        "domain.Product": {
+        "domain.Clothes": {
             "type": "object",
             "properties": {
-                "categoryId": {
+                "color": {
                     "type": "string"
                 },
                 "count": {
@@ -545,6 +633,12 @@ var doc = `{
                 },
                 "price": {
                     "type": "integer"
+                },
+                "stock": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
                 }
             }
         },

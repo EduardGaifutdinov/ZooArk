@@ -33,7 +33,7 @@ func SetupRouter() *gin.Engine {
 	configCors := cors.DefaultConfig()
 	configCors.AllowOrigins = []string{os.Getenv("CLIENT_URL"), os.Getenv("CLIENT_MOBILE_URL")}
 
-	product := usecase.NewProduct()
+	clothes := usecase.NewClothes()
 	user := usecase.NewUser()
 	category := usecase.NewCategory()
 
@@ -59,8 +59,8 @@ func SetupRouter() *gin.Engine {
 		))
 		{
 			// Products
-			admin.POST("/products", product.Add)
-
+			admin.POST("/products/clothes", clothes.Add)
+			admin.DELETE("/products/clothes/:id", clothes.Delete)
 
 			// Categories
 			admin.POST("/categories", category.Add)
@@ -75,7 +75,7 @@ func SetupRouter() *gin.Engine {
 		))
 		{
 			// Products
-
+			allUsers.GET("/products/clothes", clothes.Get)
 			// Users
 			allUsers.POST("/users", user.Add)
 			allUsers.DELETE("/users/:id", user.Delete)

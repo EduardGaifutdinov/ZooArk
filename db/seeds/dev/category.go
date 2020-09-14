@@ -11,11 +11,11 @@ import (
 // CreateCategories creates seeds for categories table
 func CreateCategory() {
 	seedExists := config.DB.
-		Where("name = ?", "init dish_categories").
+		Where("name = ?", "init categories").
 		First(&domain.Seed{}).Error
 	if seedExists != nil {
 		seed := domain.Seed{
-			Name: "init dish_categories",
+			Name: "init categories",
 		}
 
 		var categoriesArray []domain.Category
@@ -35,6 +35,6 @@ func CreateCategory() {
 		config.DB.Create(&seed)
 		fmt.Println("=== Categories seeds created ===")
 	} else {
-		fmt.Printf("Seed `init dish_categories` already exists \n")
+		fmt.Printf("Seed `init categories` already exists \n")
 	}
 }

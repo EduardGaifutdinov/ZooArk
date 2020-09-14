@@ -26,7 +26,7 @@ func (ct CategoryRepo) Add(category *domain.Category) error {
 		Where("name = ? AND (deleted_at >  ? OR deleted_at IS NULL)",
 			category.Name, category.DeletedAt).
 		Find(category).RecordNotFound(); !exist {
-			return errors.New("this category already exist")
+		return errors.New("this category already exist")
 	}
 
 	err := config.DB.Create(category).Error
@@ -82,18 +82,18 @@ func (ct CategoryRepo) GetByKey(key, value string) (domain.Category, error) {
 
 // Update checks if that name already exists in provided catering
 // if its exists throws and error, if not updates the reading
-func (dc CategoryRepo) Update(path types.PathCategory, category *domain.Category) (int,error) {
+func (dc CategoryRepo) Update(path types.PathCategory, category *domain.Category) (int, error) {
 	if categoryExist := config.DB.
 		Where("name = ? AND id = ? AND id(deleted_at > ? OR deleted_at IS NULL",
 			category.Name, path.CategoryID, time.Now()).
 		Find(&category).
 		RowsAffected; categoryExist == 0 {
-			if nameExist := config.DB.
-				Where("name = ?", category.Name).
-				Find(&category).
-				RowsAffected; nameExist != 0 {
-					return http.StatusBadRequest, errors.New("category with that name already exist")
-			}
+		if nameExist := config.DB.
+			Where("name = ?", category.Name).
+			Find(&category).
+			RowsAffected; nameExist != 0 {
+			return http.StatusBadRequest, errors.New("category with that name already exist")
+		}
 	}
 
 	if categoryNotExist := config.DB.
@@ -101,7 +101,7 @@ func (dc CategoryRepo) Update(path types.PathCategory, category *domain.Category
 		Model(&domain.Category{}).
 		Where("id = ? AND (deleted_at > ? OR deleted_at IS NULL)", path.CategoryID, time.Now()).
 		Update(category); categoryNotExist.RowsAffected == 0 {
-			return http.StatusNotFound, errors.New("category not found")
+		return http.StatusNotFound, errors.New("category not found")
 	}
 
 	return 0, nil
