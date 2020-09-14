@@ -60,6 +60,7 @@ func SetupRouter() *gin.Engine {
 		{
 			// Products
 			admin.POST("/products/clothes", clothes.Add)
+			admin.DELETE("/products/clothes/:id", clothes.Delete)
 
 			// Categories
 			admin.POST("/categories", category.Add)

@@ -8,4 +8,9 @@ type AddClothes struct {
 	Type  string
 	Color string
 	Stock string
-} // @name AddProductRequest
+} // @name AddClothesRequest
+
+// Delete request scheme
+type DeleteClothes struct {
+	Count int
+} // @name DeleteClothesRequest

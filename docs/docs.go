@@ -320,7 +320,7 @@ var doc = `{
                         "name": "payload",
                         "in": "body",
                         "schema": {
-                            "$ref": "#/definitions/AddProductRequest"
+                            "$ref": "#/definitions/AddClothesRequest"
                         }
                     }
                 ],
@@ -333,6 +333,51 @@ var doc = `{
                     },
                     "400": {
                         "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/products/clothes/{id}": {
+            "delete": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "clothes"
+                ],
+                "summary": "Soft delete",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Clothes ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "clothes object",
+                        "name": "payload",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/DeleteClothesRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successfully deleted"
+                    },
+                    "400": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
                         }
@@ -483,7 +528,7 @@ var doc = `{
                 }
             }
         },
-        "AddProductRequest": {
+        "AddClothesRequest": {
             "type": "object",
             "properties": {
                 "color": {
@@ -503,6 +548,14 @@ var doc = `{
                 },
                 "type": {
                     "type": "string"
+                }
+            }
+        },
+        "DeleteClothesRequest": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer"
                 }
             }
         },

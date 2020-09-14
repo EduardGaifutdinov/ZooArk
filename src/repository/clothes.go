@@ -4,6 +4,8 @@ import (
 	"errors"
 	"github.com/ZooArk/src/config"
 	"github.com/ZooArk/src/domain"
+	"github.com/ZooArk/src/schemes/request"
+	"github.com/ZooArk/src/types"
 	"github.com/jinzhu/gorm"
 	"net/http"
 )
@@ -82,4 +84,33 @@ func (p ClothesRepo) Get() ([]domain.Clothes, int, error) {
 	}
 
 	return clothes, 0, nil
+}
+
+// Delete was deleting count of clothes from db
+func (p ClothesRepo) Delete(clothes domain.Clothes, path types.PathID, count request.DeleteClothes) error {
+
+		if clothesExist := config.DB.
+			Select("*").
+			Where("id = ?", path.ID).
+			Find(&clothes).
+			RecordNotFound(); !clothesExist{
+
+				countDelClothes := count.Count
+				if clothes.Count - countDelClothes > 0 {
+					config.DB.
+						Model(&clothes).
+						Where("id = ?", path.ID).
+						Update("count", gorm.Expr("count - ?", countDelClothes))
+					return nil
+				}
+
+				if clothes.Count - countDelClothes == 0 {
+					config.DB.Delete(&clothes)
+					return nil
+				} else {
+					return errors.New("cant delete more product more than having ")
+				}
+			}
+
+			return errors.New("clothes not found")
 }

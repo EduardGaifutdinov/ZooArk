@@ -10,7 +10,7 @@ definitions:
     required:
     - name
     type: object
-  AddProductRequest:
+  AddClothesRequest:
     properties:
       color:
         type: string
@@ -24,6 +24,11 @@ definitions:
         type: string
       type:
         type: string
+    type: object
+  DeleteClothesRequest:
+    properties:
+      count:
+        type: integer
     type: object
   ErrorResponse:
     properties:
@@ -330,7 +335,7 @@ paths:
         in: body
         name: payload
         schema:
-          $ref: '#/definitions/AddProductRequest'
+          $ref: '#/definitions/AddClothesRequest'
       produces:
       - application/json
       responses:
@@ -342,6 +347,35 @@ paths:
           description: Error
           schema:
             $ref: '#/definitions/ErrorResponse'
+      tags:
+      - clothes
+  /products/clothes/{id}:
+    delete:
+      parameters:
+      - description: Clothes ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: clothes object
+        in: body
+        name: payload
+        schema:
+          $ref: '#/definitions/DeleteClothesRequest'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: Successfully deleted
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Soft delete
       tags:
       - clothes
   /users:

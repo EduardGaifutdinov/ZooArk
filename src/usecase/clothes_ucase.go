@@ -3,6 +3,8 @@ package usecase
 import (
 	"github.com/ZooArk/src/domain"
 	"github.com/ZooArk/src/repository"
+	"github.com/ZooArk/src/schemes/request"
+	"github.com/ZooArk/src/types"
 	"github.com/ZooArk/src/utils"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -66,4 +68,35 @@ func (p Clothes) Get(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, clothes)
+}
+
+// Delete soft delete of clothes
+// @Summary Soft delete
+// @Tags clothes
+// @Produce json
+// @Param id path string true "Clothes ID"
+// @Param payload body request.DeleteClothes false "clothes object"
+// @Success 204 "Successfully deleted"
+// @Failure 400 {object} types.Error "Error"
+// @Failure 404 {object} types.Error "Not Found"
+// @Router /products/clothes/{id} [delete]
+func (p Clothes) Delete(c *gin.Context) {
+	var clothes domain.Clothes
+	var path types.PathID
+	var count request.DeleteClothes
+
+	if err := utils.RequestBinderURI(&path, c); err != nil {
+		return
+	}
+
+	if err := utils.RequestBinderBody(&count, c); err != nil {
+		return
+	}
+
+	if err := clothesRepo.Delete(clothes, path, count); err != nil {
+		utils.CreateError(http.StatusNotFound, err, c)
+		return
+	}
+
+	c.Status(http.StatusNoContent)
 }
